@@ -1,6 +1,6 @@
 ﻿create table Materiales(IdMaterial int primary key identity(1,1),
 Descripcion varchar(100),
-Precio int );
+Precio float );
 
 create table Solicitudes(IdSolicitud int primary key identity(1,1),
 Fecha date,
