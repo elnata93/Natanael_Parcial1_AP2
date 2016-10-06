@@ -13,14 +13,12 @@ namespace BLL
         public int IdMaterial { get; set; }
         public string Descripcion { get; set; }
         public float Precio { get; set; }
-        public List<SolicitudesDetalle> MaterialDetalle { get; set; }
 
         public Materiales()
         {
             this.IdMaterial = 0;
             this.Descripcion = "";
             this.Precio = 0;
-            MaterialDetalle = new List<SolicitudesDetalle>();
         }
 
         public Materiales(int idmaterial,string descripcion,float precio)
@@ -30,35 +28,20 @@ namespace BLL
             this.Precio = precio;
         }
 
-        public void AgregarMaterial(int idSolicitud, int Idmaterial, int cantidad, float precio)
-        {
-            this.MaterialDetalle.Add(new SolicitudesDetalle(idSolicitud, Idmaterial, cantidad, precio));
-        }
-
         public override bool Insertar()
         {
-           
-            int retorno = 0;
-            object identity;
 
+            bool retorno = false;
             try {
 
-                identity = conexion.ObtenerDatos(String.Format("Insert into Facturas(Descripcion,Precio) values('{0}',{1}) select @@identity ", this.Descripcion,this.Precio));
-                int.TryParse(retorno.ToString(), out retorno);
-                this.IdMaterial = retorno;
-                if (retorno > 0 )
-                {
-                    foreach (var item in MaterialDetalle)
-                    {
-                        conexion.Ejecutar(String.Format("insert into MaterialesDetalle(Material,Cantidad) values('{0}',{1})", retorno, item.Cantidad));
-                    }
-                }
+                retorno = conexion.Ejecutar(String.Format("Insert into Materiales(Descripcion,Precio) values('{0}',{1}) ", this.Descripcion,this.Precio));
+                
             }catch (Exception Ex)
             {
 
                 throw Ex;
             }
-            return retorno > 0;
+            return retorno;
         }
 
         public override bool Editar()
@@ -67,22 +50,13 @@ namespace BLL
            
             try
             {
-                retorno = conexion.Ejecutar(String.Format("update  Facturas set Descripcion='{0}',Precio={1} where IdMaterial={2} ", this.Descripcion,this.Precio));
-                retorno = conexion.Ejecutar(String.Format("delete from MaterialesDetalle where IdMaterial = {0}", this.IdMaterial));
-                if (retorno)
-                {
-                    foreach (var item in MaterialDetalle)
-                    {
-                        retorno = conexion.Ejecutar(String.Format("insert into MaterialesDetalle(IdMateial,Material,Cantidad) values({0},{1},'{1}')", this.IdMaterial, item.Cantidad));
-                    }
-                }
-                return retorno;
+                retorno = conexion.Ejecutar(String.Format("update Materiales set Descripcion='{0}',Precio={1} where IdMaterial={2} ", this.Descripcion,this.Precio,this.IdMaterial));
             }
             catch (Exception Ex)
             {
-
                 throw Ex;
             }
+            return retorno;
         }
 
         public override bool Eliminar()
@@ -90,7 +64,7 @@ namespace BLL
             bool retorno = false;
             try
             {
-                retorno = conexion.Ejecutar(String.Format("delete from MaterialesDetalle where FacturaId= {0}" + "delete from Facturas where FacturaId = {0}",this.IdMaterial));
+                retorno = conexion.Ejecutar(String.Format("delete from Materiales where IdMaterial= {0}",this.IdMaterial));
             }
             catch (Exception Ex)
             {
@@ -102,17 +76,13 @@ namespace BLL
         public override bool Buscar(int IdBuscado)
         {
             DataTable dt = new DataTable();
-            DataTable data = new DataTable();
+            
             if(dt.Rows.Count > 0)
             {
                 this.IdMaterial = (int)dt.Rows[0]["IdMaterial"];
                 this.Descripcion = dt.Rows[0]["Descripcion"].ToString();
                 this.Precio = (float)dt.Rows[0]["Precio"];
 
-                foreach (DataRow item in data.Rows)
-                {
-                    this.AgregarMaterial(item["Material"].ToString(), (int)item["Cantidad"]);
-                }
             }
             return dt.Rows.Count > 0;
         }
@@ -122,7 +92,7 @@ namespace BLL
             string OrdenFinal = "";
             if (!Orden.Equals(""))
                 OrdenFinal = " Order By" + Orden;
-            return conexion.ObtenerDatos("select" + Campos+ "from Facturas where " + Condicion + Orden);
+            return conexion.ObtenerDatos("select" + Campos+ "from Materiales where " + Condicion + Orden);
         }
     }
 }
