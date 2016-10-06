@@ -3,35 +3,130 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using DAL;
 
 namespace BLL
 {
     public class Solicitudes : ClaseMaestra
     {
+        ConexionDb conexion = new ConexionDb();
+        public int IdSolicitud { get; set; }
+        public string Fecha { get; set; }
+        public string Razon { get; set; }
+        public float Total { get; set; }
+        public List<SolicitudesDetalle> SolicitudDetalle { get; set; }
+
+        public Solicitudes()
+        {
+            this.IdSolicitud = 0;
+            this.Fecha = "";
+            this.Razon = "";
+            this.Total = 0;
+            this.SolicitudDetalle = new List<SolicitudesDetalle>();
+        }
+
+        public Solicitudes(int idSolicitud,string fecha,string razon,float total)
+        {
+            this.IdSolicitud = idSolicitud;
+            this.Fecha = fecha;
+            this.Razon = razon;
+            this.Total = total;
+        }
+
+        public void AgregarSolicitud( int Idmaterial, int cantidad, float precio)
+        {
+            this.SolicitudDetalle.Add(new SolicitudesDetalle( Idmaterial, cantidad, precio));
+        }
 
         public override bool Insertar()
         {
-            throw new NotImplementedException();
+           
+            int retorno = 0;
+            object identity;
+
+            try {
+
+                identity = conexion.ObtenerDatos(String.Format("Insert into Solicitudes(Fecha,Razon,Total) values('{0}','{1}',{2}) select @@identity ", this.Fecha,this.Razon,this.Total));
+                int.TryParse(retorno.ToString(), out retorno);
+                this.IdSolicitud = retorno;
+                if (retorno > 0 )
+                {
+                    foreach (var item in SolicitudDetalle)
+                    {
+                        conexion.Ejecutar(String.Format("insert into MaterialesDetalle(IdSolicitud,IdMaterial,Cantidad,Precio) values({0},{1},{2},{3})", retorno,item.IdMaterial,item.Cantidad,item.Precio));
+                    }
+                }
+            }catch (Exception Ex)
+            {
+
+                throw Ex;
+            }
+            return retorno > 0;
         }
 
         public override bool Editar()
         {
-            throw new NotImplementedException();
+            bool retorno = false;
+           
+            try
+            {
+                retorno = conexion.Ejecutar(String.Format("update  Solicitudes set Fecha='{0}',Razon='{1}',Total={2} where IdSolicitud={3} ", this.Fecha,this.Razon,this.Total,this.IdSolicitud));
+                retorno = conexion.Ejecutar(String.Format("delete from SolicitudesDetalle where IdSolicitud = {0}", this.IdSolicitud));
+                if (retorno)
+                {
+                    foreach (var item in SolicitudDetalle)
+                    {
+                        retorno = conexion.Ejecutar(String.Format("insert into SolicitudesDetalle(IdSolicitud,IdMaterial,Cantidad,Precio) values({0},{1},{2},{3})", retorno, item.IdMaterial, item.Cantidad, item.Precio));
+                    }
+                }
+                return retorno;
+            }
+            catch (Exception Ex)
+            {
+
+                throw Ex;
+            }
         }
 
         public override bool Eliminar()
         {
-            throw new NotImplementedException();
-        }
+            bool retorno = false;
+            try
+            {
+                retorno = conexion.Ejecutar(String.Format("delete from SolicitudesDetalle where IdSolicitud= {0}" + "delete from Solicitudes where IdSolicitud = {0}", this.IdSolicitud));
+            }
+            catch (Exception Ex)
+            {
 
+                throw Ex;
+            }
+            return retorno;
+        }
         public override bool Buscar(int IdBuscado)
         {
-            throw new NotImplementedException();
+            DataTable dt = new DataTable();
+            DataTable data = new DataTable();
+            if(dt.Rows.Count > 0)
+            {
+                this.IdSolicitud = (int)dt.Rows[0]["IdSolicitud"];
+                this.Fecha = dt.Rows[0]["Descripcion"].ToString();
+                this.Razon = dt.Rows[0]["Razon"].ToString();
+                this.Total = (float)dt.Rows[0]["Precio"];
+
+                foreach (DataRow item in data.Rows)
+                {
+                    this.AgregarSolicitud((int)item["IdMaterial"], (int)item["Cantidad"], (float)item["Precio"]);
+                }
+            }
+            return dt.Rows.Count > 0;
         }
 
         public override DataTable Listado(string Campos, string Condicion, string Orden)
         {
-            throw new NotImplementedException();
+            string OrdenFinal = "";
+            if (!Orden.Equals(""))
+                OrdenFinal = " Order By" + Orden;
+            return conexion.ObtenerDatos("select" + Campos+ "from Slicitudes where " + Condicion + Orden);
         }
     }
 }

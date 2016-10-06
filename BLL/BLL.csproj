@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="ClaseMaestra.cs" />
     <Compile Include="Materiales.cs" />
-    <Compile Include="MaterialesDetalle.cs" />
+    <Compile Include="SolicitudesDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solicitudes.cs" />
   </ItemGroup>

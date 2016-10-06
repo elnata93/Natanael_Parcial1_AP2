@@ -13,14 +13,14 @@ namespace BLL
         public int IdMaterial { get; set; }
         public string Descripcion { get; set; }
         public float Precio { get; set; }
-        public List<MaterialesDetalle> MaterialDetalle { get; set; }
+        public List<SolicitudesDetalle> MaterialDetalle { get; set; }
 
         public Materiales()
         {
             this.IdMaterial = 0;
             this.Descripcion = "";
             this.Precio = 0;
-            MaterialDetalle = new List<MaterialesDetalle>();
+            MaterialDetalle = new List<SolicitudesDetalle>();
         }
 
         public Materiales(int idmaterial,string descripcion,float precio)
@@ -30,9 +30,9 @@ namespace BLL
             this.Precio = precio;
         }
 
-        public void AgregarMaterial(string material, int cantidad)
+        public void AgregarMaterial(int idSolicitud, int Idmaterial, int cantidad, float precio)
         {
-            this.MaterialDetalle.Add(new MaterialesDetalle(material, cantidad));
+            this.MaterialDetalle.Add(new SolicitudesDetalle(idSolicitud, Idmaterial, cantidad, precio));
         }
 
         public override bool Insertar()

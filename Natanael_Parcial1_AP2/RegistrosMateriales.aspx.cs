@@ -65,7 +65,7 @@ namespace Natanael_Parcial1_AP2
         private void LlenarDatos()
         {
              factura.Razon = IdTextBox.Text;
-            foreach (MaterialesDetalle item in factura.MaterialDetalle)
+            foreach (SolicitudesDetalle item in factura.MaterialDetalle)
             {
                 //factura.AgregarMaterial(item[0], item[1]);
             }
