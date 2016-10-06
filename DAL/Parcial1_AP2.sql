@@ -1,9 +1,17 @@
-﻿create table Facturas(FacturaId int primary key identity(1,1),
-Razon varchar(100));
+﻿create table Materiales(IdMaterial int primary key identity(1,1),
+Descripcion varchar(100),
+Precio int );
 
-create table MaterialesDetalle(MaterialDetalleId int primary key identity(1,1),
-FacturaId int references Facturas(FacturaId),
-Material varchar(50),
-Cantidad int );
+create table Solicitudes(IdSolicitud int primary key identity(1,1),
+Fecha date,
+Razon varchar(100),
+Total float);
+
+create table SolicitudesDetalle(Id int primary key identity(1,1),
+IdSolicitud int references Solicitudes(IdSolicitud),
+IdMaterial int references Materiales(IdMateriales),
+Cantidad int,
+Precio float );
 
 drop table MaterialesDetalle
+drop  table Factura

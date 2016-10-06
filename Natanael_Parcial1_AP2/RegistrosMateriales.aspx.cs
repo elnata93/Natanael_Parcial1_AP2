@@ -11,7 +11,7 @@ namespace Natanael_Parcial1_AP2
 {
     public partial class RegistrosMateriales : System.Web.UI.Page
     {
-        Facturas factura = new Facturas();
+        Materiales factura = new Materiales();
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
