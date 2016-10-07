@@ -82,7 +82,6 @@ namespace BLL
                 this.IdMaterial = (int)dt.Rows[0]["IdMaterial"];
                 this.Descripcion = dt.Rows[0]["Descripcion"].ToString();
                 this.Precio = (float)dt.Rows[0]["Precio"];
-
             }
             return dt.Rows.Count > 0;
         }

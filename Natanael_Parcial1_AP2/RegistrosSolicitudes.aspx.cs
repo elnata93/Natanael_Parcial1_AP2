@@ -17,11 +17,15 @@ namespace Natanael_Parcial1_AP2
             dt.Columns.AddRange(new DataColumn[4] { new DataColumn("IdSolicitud"),new DataColumn("IdMaterial"),new DataColumn("Cantidad"),new DataColumn("Precio") });
             ViewState["SlicitudesDetalle"] = dt;
             //Session["dt"] = dt; { new DataColumn("IdSolicitud"); new DataColumn("IdMaterial"); new DataColumn("Cantidad"); new DataColumn("Precio"); }
+          
         }
         
         Solicitudes solicitud = new Solicitudes();
         Materiales material = new Materiales();
-
+        // private void FechaTime()
+        //{
+        //    FechaTextBox = (int)((DateTime.Now.Day) (DateTime.Now.Month) (DateTime.Now.Year));
+        //}
         private int  Id(string numero)
         {
             int id = 0;
@@ -29,27 +33,34 @@ namespace Natanael_Parcial1_AP2
             return id;
         }
 
-        private void LlenarCampos()
+        private void LlenarCampos(Solicitudes solicitud)
         {
             RazonTextBox.Text = solicitud.Razon;
             MaterialesGridView.DataSource = solicitud.SolicitudDetalle;
             MaterialesGridView.DataBind();
 
         }
-
-        protected void BuscarButton_Click(object sender, EventArgs e)
+        protected void BuscarButton_Click1(object sender, EventArgs e)
         {
             if(IdTextBox.Text == "")
             {
-                LlenarCampos();
+                Response.Write("<script>Alert('Introdusca el ID')</script>");
+            }    
                 if(IdTextBox.Text.Length > 0)
                 {
-
+                    if (solicitud.Buscar(Id(IdTextBox.Text)))
+                    {
+                        LlenarCampos(solicitud);
+                    }
+                    else
+                    {
+                        Response.Write("<script>Alert('Id no existe')</script>");
+                    }
                 }else
                 {
-
+                    Response.Write("<script>Alert('Id no Encontrado.')</script>");
                 }
-            }
+
         }
 
         private void Limpiar()
@@ -112,5 +123,13 @@ namespace Natanael_Parcial1_AP2
             MaterialesGridView.DataSource = solicitud.SolicitudDetalle;
             MaterialesGridView.DataBind();
         }
+
+        protected void FechaTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
+        
+        }
+
+        
     }
 }
