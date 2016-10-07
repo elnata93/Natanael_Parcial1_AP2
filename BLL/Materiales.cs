@@ -76,7 +76,7 @@ namespace BLL
         public override bool Buscar(int IdBuscado)
         {
             DataTable dt = new DataTable();
-            
+            dt = conexion.ObtenerDatos(string.Format("select * from Materiales where IdMateriales= " + IdBuscado));
             if(dt.Rows.Count > 0)
             {
                 this.IdMaterial = (int)dt.Rows[0]["IdMaterial"];

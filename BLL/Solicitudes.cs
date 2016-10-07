@@ -76,7 +76,7 @@ namespace BLL
                 {
                     foreach (var item in SolicitudDetalle)
                     {
-                        retorno = conexion.Ejecutar(String.Format("insert into SolicitudesDetalle(IdSolicitud,IdMaterial,Cantidad,Precio) values({0},{1},{2},{3})", retorno, item.IdMaterial, item.Cantidad, item.Precio));
+                        retorno = conexion.Ejecutar(String.Format("insert into SolicitudesDetalle(IdSolicitud,IdMaterial,Cantidad,Precio) values({0},{1},{2},{3})", this.IdSolicitud, item.IdMaterial, item.Cantidad, item.Precio));
                     }
                 }
                 return retorno;
@@ -106,13 +106,15 @@ namespace BLL
         {
             DataTable dt = new DataTable();
             DataTable data = new DataTable();
-            if(dt.Rows.Count > 0)
+            dt = conexion.ObtenerDatos(string.Format("select * from Solicitudes where IdSolicitud= " + IdBuscado));
+            if (dt.Rows.Count > 0)
             {
                 this.IdSolicitud = (int)dt.Rows[0]["IdSolicitud"];
-                this.Fecha = dt.Rows[0]["Descripcion"].ToString();
+                this.Fecha = dt.Rows[0]["Fecha"].ToString();
                 this.Razon = dt.Rows[0]["Razon"].ToString();
                 this.Total = (float)dt.Rows[0]["Precio"];
 
+                data = conexion.ObtenerDatos(string.Format("select * from SolicitudesDetalle where IdSolicitud= " + IdBuscado));
                 foreach (DataRow item in data.Rows)
                 {
                     this.AgregarSolicitud((int)item["IdMaterial"], (int)item["Cantidad"], (float)item["Precio"]);

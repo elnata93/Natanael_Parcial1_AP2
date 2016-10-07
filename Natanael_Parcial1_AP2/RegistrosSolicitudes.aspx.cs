@@ -11,13 +11,17 @@ namespace Natanael_Parcial1_AP2
 {
     public partial class RegistrosMateriales : System.Web.UI.Page
     {
-        Materiales factura = new Materiales();
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[2]);
-            //Session["dt"]= dt { new (""),new("")};
+            dt.Columns.AddRange(new DataColumn[4] { new DataColumn("IdSolicitud"),new DataColumn("IdMaterial"),new DataColumn("Cantidad"),new DataColumn("Precio") });
+            ViewState["SlicitudesDetalle"] = dt;
+            //Session["dt"] = dt; { new DataColumn("IdSolicitud"); new DataColumn("IdMaterial"); new DataColumn("Cantidad"); new DataColumn("Precio"); }
         }
+        
+        Solicitudes solicitud = new Solicitudes();
+        Materiales material = new Materiales();
+
         private int  Id(string numero)
         {
             int id = 0;
@@ -52,9 +56,10 @@ namespace Natanael_Parcial1_AP2
         {
             IdTextBox.Text = "";
             RazonTextBox.Text = "";
-            MaterialTextBox.Text = "";
+            MaterialDropDownList.Text = "";
             CantidadTextBox.Text = "";
-            MaterialesGridView.DataSource = "";
+            PrecioDropDownList.Text = "";
+            MaterialesGridView.DataSource = null;
             MaterialesGridView.DataBind();
 
         }
@@ -64,10 +69,11 @@ namespace Natanael_Parcial1_AP2
         }
         private void LlenarDatos()
         {
-             factura.Razon = IdTextBox.Text;
-            foreach (SolicitudesDetalle item in factura.MaterialDetalle)
+
+            solicitud.Razon = IdTextBox.Text;
+            foreach (SolicitudesDetalle item in solicitud.SolicitudDetalle)
             {
-                //factura.AgregarMaterial(item[0], item[1]);
+                //solicitud.AgregarSolicitud(item[0], item[1]);
             }
         }
         protected void GuardarButton_Click(object sender, EventArgs e)
@@ -82,7 +88,7 @@ namespace Natanael_Parcial1_AP2
         {
             if(IdTextBox.Text.Length > 0)
             {
-                if (factura.Eliminar())
+                if (solicitud.Eliminar())
                 {
 
                 }else
@@ -94,7 +100,17 @@ namespace Natanael_Parcial1_AP2
 
         protected void AgregarButton_Click(object sender, EventArgs e)
         {
+            Solicitudes solicitud;
 
+            if (Session["solicitud"] == null)
+            {
+                Session["solicitud"] = new Solicitudes();
+            }
+            solicitud = (Solicitudes)Session["solicitud"];
+
+            solicitud.AgregarSolicitud(Convert.ToInt32(MaterialDropDownList.Text), Convert.ToInt32(CantidadTextBox.Text),Convert.ToSingle(PrecioDropDownList.Text));
+            MaterialesGridView.DataSource = solicitud.SolicitudDetalle;
+            MaterialesGridView.DataBind();
         }
     }
 }

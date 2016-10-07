@@ -63,7 +63,7 @@
     <Content Include="App_Data\Parcial1Db_log.ldf">
       <DependentUpon>Parcial1Db.mdf</DependentUpon>
     </Content>
-    <Content Include="RegistrosMateriales.aspx" />
+    <Content Include="RegistrosSolicitudes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,12 +80,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RegistrosMateriales.aspx.cs">
-      <DependentUpon>RegistrosMateriales.aspx</DependentUpon>
+    <Compile Include="RegistrosSolicitudes.aspx.cs">
+      <DependentUpon>RegistrosSolicitudes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistrosMateriales.aspx.designer.cs">
-      <DependentUpon>RegistrosMateriales.aspx</DependentUpon>
+    <Compile Include="RegistrosSolicitudes.aspx.designer.cs">
+      <DependentUpon>RegistrosSolicitudes.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

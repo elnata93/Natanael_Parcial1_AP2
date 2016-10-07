@@ -40,6 +40,15 @@ namespace Natanael_Parcial1_AP2 {
         protected global::System.Web.UI.WebControls.Button BuacarButton;
         
         /// <summary>
+        /// FechaTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer FechaTimer;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -58,15 +67,6 @@ namespace Natanael_Parcial1_AP2 {
         protected global::System.Web.UI.WebControls.TextBox RazonTextBox;
         
         /// <summary>
-        /// MaterialesGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MaterialesGridView;
-        
-        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -76,13 +76,13 @@ namespace Natanael_Parcial1_AP2 {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// MaterialTextBox control.
+        /// MaterialDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MaterialTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList MaterialDropDownList;
         
         /// <summary>
         /// Label4 control.
@@ -103,6 +103,24 @@ namespace Natanael_Parcial1_AP2 {
         protected global::System.Web.UI.WebControls.TextBox CantidadTextBox;
         
         /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
+        
+        /// <summary>
+        /// PrecioDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PrecioDropDownList;
+        
+        /// <summary>
         /// AgregarButton control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,24 @@ namespace Natanael_Parcial1_AP2 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button AgregarButton;
+        
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+        
+        /// <summary>
+        /// MaterialesGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView MaterialesGridView;
         
         /// <summary>
         /// NuevoButton control.

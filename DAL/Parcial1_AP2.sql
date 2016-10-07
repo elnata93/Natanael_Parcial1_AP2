@@ -8,7 +8,7 @@ Razon varchar(100),
 Total float);
 
 create table SolicitudesDetalle(Id int primary key identity(1,1),
-IdSolicitud int 
+IdSolicitud int, 
 IdMaterial int references Materiales(IdMateriales),
 Cantidad int,
 Precio float );
