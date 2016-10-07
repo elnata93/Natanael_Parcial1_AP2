@@ -31,8 +31,8 @@ namespace Natanael_Parcial1_AP2
 
         private void LlenarCampos()
         {
-            RazonTextBox.Text = factura.Razon;
-            MaterialesGridView.DataSource = factura.MaterialDetalle;
+            RazonTextBox.Text = solicitud.Razon;
+            MaterialesGridView.DataSource = solicitud.SolicitudDetalle;
             MaterialesGridView.DataBind();
 
         }
