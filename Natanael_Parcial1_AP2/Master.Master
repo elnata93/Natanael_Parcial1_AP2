@@ -1,0 +1,32 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="Natanael_Parcial1_AP2.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>    
+        
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+        <div id="contenerdor">
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="Default.aspx">Inicio</a></li>
+                        <li><a href="RegistrosMateriales.aspx" > Materiales </a></li>
+                        <li><a href="RegistrosSolicitudes.aspx" > Solicitudes </a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    </form>
+</body>
+</html>

@@ -9,7 +9,7 @@ Total float);
 
 create table SolicitudesDetalle(Id int primary key identity(1,1),
 IdSolicitud int, 
-IdMaterial int references Materiales(IdMateriales),
+IdMaterial int references Materiales(IdMaterial),
 Cantidad int,
 Precio float );
 

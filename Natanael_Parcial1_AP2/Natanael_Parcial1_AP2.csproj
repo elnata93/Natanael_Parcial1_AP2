@@ -63,22 +63,38 @@
     <Content Include="App_Data\Parcial1Db_log.ldf">
       <DependentUpon>Parcial1Db.mdf</DependentUpon>
     </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="RegistrosMateriales.aspx" />
     <Content Include="RegistrosSolicitudes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Index.Master.cs">
-      <DependentUpon>Index.Master</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Index.Master.designer.cs">
-      <DependentUpon>Index.Master</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master.Master.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master.Master.designer.cs">
+      <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrosMateriales.aspx.cs">
+      <DependentUpon>RegistrosMateriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrosMateriales.aspx.designer.cs">
+      <DependentUpon>RegistrosMateriales.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistrosSolicitudes.aspx.cs">
       <DependentUpon>RegistrosSolicitudes.aspx</DependentUpon>
@@ -89,7 +105,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Index.Master" />
+    <Content Include="Master.Master" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,6 +122,9 @@
       <Project>{3cb6e443-176d-4da4-b5ec-66f06dfc5f2f}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

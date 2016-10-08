@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Index.Master" AutoEventWireup="true" CodeBehind="RegistrosSolicitudes.aspx.cs" Inherits="Natanael_Parcial1_AP2.RegistrosMateriales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Master.Master" AutoEventWireup="true" CodeBehind="RegistrosSolicitudes.aspx.cs" Inherits="Natanael_Parcial1_AP2.RegistrosMateriales" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style6 {
@@ -38,9 +38,7 @@
                     </td>
                     <td class="auto-style10">
                         <asp:Label ID="Label10" runat="server" Text="Fecha"></asp:Label>
-                            
-                        <asp:TextBox ID="FechaTextBox" runat="server"  Height="16px" Width="78px" OnTextChanged="FechaTextBox_TextChanged"></asp:TextBox>
-                            
+                        <asp:TextBox ID="FechaTextBox" runat="server"  Height="16px" Width="78px" OnTextChanged="FechaTextBox_TextChanged"></asp:TextBox>    
                 </td>
             </tr>
             <tr>
@@ -92,7 +90,7 @@
                 <td class="auto-style12">&nbsp;</td>
                 
                 <td class="auto-style11">
-                    <asp:Button ID="NuevoButton" runat="server" Text="Nuevo" OnClick="NuevoButton_Click" />
+                    <asp:Button ID="NuevoButton" runat="server" Text="Nuevo" OnClick="NuevoButton_Click" style="height: 26px" />
                     <asp:Button ID="GuardarButton" runat="server" Text="Guardar" OnClick="GuardarButton_Click" />
                     <asp:Button ID="EliminarButton" runat="server" Text="Eliminar" OnClick="EliminarButton_Click" />
                 </td>

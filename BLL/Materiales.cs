@@ -64,7 +64,7 @@ namespace BLL
             bool retorno = false;
             try
             {
-                retorno = conexion.Ejecutar(String.Format("delete from Materiales where IdMaterial= {0}",this.IdMaterial));
+                retorno = conexion.Ejecutar(String.Format(" delete from Materiales where IdMaterial={0} ",this.IdMaterial));
             }
             catch (Exception Ex)
             {
@@ -76,12 +76,12 @@ namespace BLL
         public override bool Buscar(int IdBuscado)
         {
             DataTable dt = new DataTable();
-            dt = conexion.ObtenerDatos(string.Format("select * from Materiales where IdMateriales= " + IdBuscado));
+            dt = conexion.ObtenerDatos(string.Format("select * from Materiales where IdMaterial= " + IdBuscado));
             if(dt.Rows.Count > 0)
             {
                 this.IdMaterial = (int)dt.Rows[0]["IdMaterial"];
                 this.Descripcion = dt.Rows[0]["Descripcion"].ToString();
-                this.Precio = (float)dt.Rows[0]["Precio"];
+                this.Precio = (float)Convert.ToSingle(dt.Rows[0]["Precio"]);
             }
             return dt.Rows.Count > 0;
         }

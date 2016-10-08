@@ -17,7 +17,8 @@ namespace Natanael_Parcial1_AP2
             dt.Columns.AddRange(new DataColumn[4] { new DataColumn("IdSolicitud"),new DataColumn("IdMaterial"),new DataColumn("Cantidad"),new DataColumn("Precio") });
             ViewState["SlicitudesDetalle"] = dt;
             //Session["dt"] = dt; { new DataColumn("IdSolicitud"); new DataColumn("IdMaterial"); new DataColumn("Cantidad"); new DataColumn("Precio"); }
-          
+            FechaTextBox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            FechaTextBox.Enabled = false;
         }
         
         Solicitudes solicitud = new Solicitudes();
@@ -35,6 +36,7 @@ namespace Natanael_Parcial1_AP2
 
         private void LlenarCampos(Solicitudes solicitud)
         {
+            FechaTextBox.Text = solicitud.Fecha;
             RazonTextBox.Text = solicitud.Razon;
             MaterialesGridView.DataSource = solicitud.SolicitudDetalle;
             MaterialesGridView.DataBind();
