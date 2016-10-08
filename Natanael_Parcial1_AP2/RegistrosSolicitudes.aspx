@@ -61,8 +61,8 @@
                     <asp:Label ID="Label5" runat="server" Text="Precio"></asp:Label>
                     <asp:DropDownList ID="PrecioDropDownList" runat="server" Height="19px" Width="103px">
                     </asp:DropDownList>
-                    <asp:Label ID="Label8" runat="server" Text="Importe"></asp:Label>
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    <%--<asp:Label ID="Label8" runat="server" Text="Importe"></asp:Label>
+                    <asp:TextBox ID="ImporteTextBox" runat="server"></asp:TextBox>--%>
                 </td>
                 <td>
                     <asp:Button ID="AgregarButton" runat="server" Text="Agregar" OnClick="AgregarButton_Click" />
@@ -72,7 +72,12 @@
             <tr>
                 <td class="auto-style12">&nbsp;</td>
                 <td class="auto-style11">
-                <asp:GridView ID="MaterialesGridView" runat="server" Width="100%">
+                <asp:GridView ID="MaterialesGridView" runat="server" Width="100%" AutoGenerateColumns="False">
+                    <Columns>
+                        <asp:BoundField HeaderText="Material" />
+                        <asp:BoundField HeaderText="Cantidad" />
+                        <asp:BoundField HeaderText="Precio" />
+                    </Columns>
                 </asp:GridView>
                 </td>
                 <td class="auto-style6">&nbsp;</td>
@@ -83,6 +88,7 @@
                     <td class="auto-style11">&nbsp;</td>
                     <td>
                     <asp:Label ID="Label7" runat="server" Text="Total"></asp:Label>
+                        <asp:TextBox ID="TotalTextBox" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                
@@ -90,7 +96,7 @@
                 <td class="auto-style12">&nbsp;</td>
                 
                 <td class="auto-style11">
-                    <asp:Button ID="NuevoButton" runat="server" Text="Nuevo" OnClick="NuevoButton_Click" style="height: 26px" />
+                    <asp:Button ID="NuevoButton" runat="server" Text="Nuevo" OnClick="NuevoButton_Click" Height="25px" />
                     <asp:Button ID="GuardarButton" runat="server" Text="Guardar" OnClick="GuardarButton_Click" />
                     <asp:Button ID="EliminarButton" runat="server" Text="Eliminar" OnClick="EliminarButton_Click" />
                 </td>

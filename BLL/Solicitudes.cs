@@ -71,10 +71,11 @@ namespace BLL
             try
             {
                 retorno = conexion.Ejecutar(String.Format("update  Solicitudes set Fecha='{0}',Razon='{1}',Total={2} where IdSolicitud={3} ", this.Fecha,this.Razon,this.Total,this.IdSolicitud));
-                retorno = conexion.Ejecutar(String.Format("delete from SolicitudesDetalle where IdSolicitud = {0}", this.IdSolicitud));
+                
                 if (retorno)
                 {
-                    foreach (var item in SolicitudDetalle)
+                    retorno = conexion.Ejecutar(String.Format("delete from SolicitudesDetalle where IdSolicitud = {0}", this.IdSolicitud));
+                    foreach (SolicitudesDetalle item in SolicitudDetalle)
                     {
                         retorno = conexion.Ejecutar(String.Format("insert into SolicitudesDetalle(IdSolicitud,IdMaterial,Cantidad,Precio) values({0},{1},{2},{3})", this.IdSolicitud, item.IdMaterial, item.Cantidad, item.Precio));
                     }
@@ -117,7 +118,7 @@ namespace BLL
                 data = conexion.ObtenerDatos(string.Format("select * from SolicitudesDetalle where IdSolicitud= " + IdBuscado));
                 foreach (DataRow item in data.Rows)
                 {
-                    this.AgregarSolicitud((int)item["IdMaterial"], (int)item["Cantidad"], (float)item["Precio"]);
+                    this.AgregarSolicitud(Convert.ToInt32(data.Rows[0]["IdMaterial"]), Convert.ToInt32(data.Rows[0]["Cantidad"]), Convert.ToSingle(data.Rows[0]["Precio"]));
                 }
             }
             return dt.Rows.Count > 0;
